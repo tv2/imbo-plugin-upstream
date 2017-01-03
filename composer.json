@@ -1,0 +1,31 @@
+{
+    "name": "tv2/imbo-plugin-upstream",
+    "description": "Configure a upstream Imbo instance where unknown image identifiers will be replicated from",
+    "keywords": [ "imbo", "upstream" ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Morten Fangel",
+            "email": "fangel@sevengoslings.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/tv2/imbo-plugin-upstream"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:tv2/imbo-plugin-upstream.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "imbo/imboclient": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tv2\\Imbo\\Plugins\\": "library/"
+        }
+    }
+}

@@ -1,0 +1,13 @@
+<?php
+
+use Tv2\Imbo\Plugins\Upstream;
+
+return [
+  'eventListeners' => [
+    'upstream' => new Upstream([
+       'upstream' => 'http://imbo-production.example.com',
+       'publicKey' => 'read-only-all-public-keys',
+       'privateKey' => 'private-key',
+     ]),
+  ]
+];
