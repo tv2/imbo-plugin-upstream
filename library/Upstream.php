@@ -89,8 +89,25 @@ class Upstream implements ListenerInterface {
 
       // And then store this in the local storage and database.
       $database->insertImage($user, $imageIdentifier, $image);
-      $database->updateMetadata($user, $imageIdentifier, $image->getMetadata());
       $storage->store($user, $imageIdentifier, $image->getBlob());
+
+      // We fake a PUT-request to the metadata-resource to update the metadata
+      // We do this, because it ensures that e.g. the Metadata Search plugin
+      // will post the image to the search-index.
+      // First we need to create a new request that contains the metadata as
+      // the post-data, for the metadata-route
+      $fakeRoute = new Route();
+      $fakeRoute->setName('metadata');
+      $fakeRoute->set('user', $request->getUser());
+      $fakeRoute->set('imageIdentifier', $request->getImageIdentifier());
+      $fakeRequest = Request::create($request->getRequestUri(), 'PUT', [], [], [], [], json_encode($image->getMetadata()));
+      $fakeRequest->setRoute($fakeRoute);
+
+      // And then we can dispatch the event as the 'metadata.put'-event.
+      $event->getManager()->trigger('metadata.put', [
+        'skipAccessControl' => TRUE,
+        'request' => $fakeRequest,
+      ]);
     }
   }
 }
