@@ -7,6 +7,7 @@ use Imbo\EventListener\ListenerInterface,
     ImboClient\ImboClient,
     ImboClient\ImagesQuery,
     Imbo\Router\Route,
+    Imbo\Http\Request\Request,
     Imbo\Model\Image;
 
 /**
