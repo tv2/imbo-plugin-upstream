@@ -6,6 +6,7 @@ use Imbo\EventListener\ListenerInterface,
     Imbo\Exception\StorageException,
     ImboClient\ImboClient,
     ImboClient\ImagesQuery,
+    Imbo\Router\Route,
     Imbo\Model\Image;
 
 /**
